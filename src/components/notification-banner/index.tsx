@@ -38,6 +38,7 @@ export function Root({ success, disableAutoFocus, className, ...props }: RootPro
 
 export type HeaderProps = ComponentProps<'div'>;
 
+/** The header of the banner, containing its title. */
 export function Header({ className, ...props }: HeaderProps) {
   return <div className={clsx('govuk-notification-banner__header', className)} {...props} />;
 }
@@ -47,6 +48,7 @@ export type TitleProps = ComponentProps<'h2'> & {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
+/** The title of the banner. */
 export function Title({ headingLevel = 2, className, children, ...props }: TitleProps) {
   const Heading = `h${headingLevel}` as const;
   return (
@@ -62,12 +64,14 @@ export function Title({ headingLevel = 2, className, children, ...props }: Title
 
 export type ContentProps = ComponentProps<'div'>;
 
+/** The content of the banner. */
 export function Content({ className, ...props }: ContentProps) {
   return <div className={clsx('govuk-notification-banner__content', className)} {...props} />;
 }
 
 export type HeadingProps = ComponentProps<'p'>;
 
+/** The main message of the banner. */
 export function Heading({ className, ...props }: HeadingProps) {
   return <p className={clsx('govuk-notification-banner__heading', className)} {...props} />;
 }
@@ -77,6 +81,7 @@ export type LinkProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** A link in the banner. */
 export function Link({ className, asChild, children, ...props }: LinkProps) {
   const Element = asChild ? Slot : 'a';
   return (
@@ -93,6 +98,7 @@ export type CompositeProps = Omit<RootProps, 'title'> & {
   titleId?: string;
   /** Sets heading level for the title only. You can only use values between `1` and `6` with this option. The default is `2`. */
   titleHeadingLevel?: TitleProps['headingLevel'];
+  /** The main message of the banner, rendered in `Heading`. Use children instead for other content. */
   heading?: ReactNode;
 };
 

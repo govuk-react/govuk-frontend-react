@@ -19,12 +19,17 @@ export function Root({ lang = 'en', className, ...props }: RootProps) {
 }
 
 export type HeadCompositeProps = ComponentProps<'head'> & {
+  /** The title of the page. */
   title?: ReactNode;
+  /** The language of the title, when it differs from the language of the page. */
   titleLang?: string;
+  /** The colour of the browser toolbar on some devices. Defaults to `"#1d70b8"`. */
   themeColor?: string;
+  /** The path the icons and manifest are served from. Defaults to `"/assets"`. */
   assetPath?: string;
   /** Used for the Open Graph image when `opengraphImageUrl` isn't set. */
   assetUrl?: string;
+  /** The URL of the image shown when the page is shared on social media. */
   opengraphImageUrl?: string;
 };
 
@@ -60,18 +65,21 @@ export function HeadComposite({
 
 export type BodyProps = ComponentProps<'body'>;
 
+/** The `<body>` of the page. */
 export function Body({ className, ...props }: BodyProps) {
   return <body className={clsx('govuk-template__body', className)} {...props} />;
 }
 
 export type HeaderProps = ComponentProps<'header'>;
 
+/** The `<header>` of the page. */
 export function Header({ className, ...props }: HeaderProps) {
   return <header className={clsx('govuk-template__header', className)} {...props} />;
 }
 
 export type FooterProps = ComponentProps<'footer'>;
 
+/** The `<footer>` of the page. */
 export function Footer({ className, ...props }: FooterProps) {
   return <footer className={clsx('govuk-template__footer', className)} {...props} />;
 }
@@ -86,9 +94,13 @@ export type CompositeProps = Omit<RootProps, 'title'> &
     skipLink?: ReactNode;
     /** Defaults to `Header.Composite`. `false` leaves it out. */
     header?: ReactNode;
+    /** The name of the service, shown in the service navigation. */
     serviceName?: ReactNode;
+    /** The URL the service name links to. */
     serviceHref?: string;
+    /** Content between the header and the main content, such as a back link, breadcrumbs or a phase banner. */
     beforeContent?: ReactNode;
+    /** The language of the main content, when it differs from the language of the page. */
     mainLang?: string;
     /** Defaults to `Footer.Composite`. `false` leaves it out. */
     footer?: ReactNode;

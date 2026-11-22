@@ -3,8 +3,11 @@ import { clsx } from 'clsx';
 import { Slot } from '../../utils/slot';
 
 export type LinkProps = ComponentProps<'a'> & {
+  /** The colours of the link: `inverse` for a dark background, `muted` for a less prominent link, `text-colour` to match the surrounding text. */
   variant?: 'inverse' | 'muted' | 'text-colour';
+  /** Whether to remove the underline until the user hovers over the link. */
   noUnderline?: boolean;
+  /** Whether the link keeps its colour once the user has visited it. */
   noVisitedState?: boolean;
   /** Render the only child (such as a router's link) instead of an `a`, with the link classes merged onto it. */
   asChild?: boolean;

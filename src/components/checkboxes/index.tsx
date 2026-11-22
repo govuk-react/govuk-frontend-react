@@ -7,7 +7,10 @@ import * as Fieldset from '../fieldset';
 import { Hint as BaseHint, type HintProps as BaseHintProps } from '../hint';
 import { LabelComposite as BaseLabel, type LabelCompositeProps as BaseLabelProps } from '../label';
 
-export type RootProps = ComponentProps<'div'> & { small?: boolean };
+export type RootProps = ComponentProps<'div'> & {
+  /** Whether to use smaller checkboxes. */
+  small?: boolean;
+};
 
 /**
  * Let users select one or more options by using the checkboxes component.
@@ -26,12 +29,14 @@ export function Root({ small, className, ...props }: RootProps) {
 
 export type ItemProps = ComponentProps<'div'>;
 
+/** A checkbox with its label, and its hint if it has one. */
 export function Item({ className, ...props }: ItemProps) {
   return <div className={clsx('govuk-checkboxes__item', className)} {...props} />;
 }
 
 export type InputProps = Omit<ComponentProps<'input'>, 'type'>;
 
+/** The checkbox input. */
 export function Input({ className, ...props }: InputProps) {
   return (
     <input className={clsx('govuk-checkboxes__input', className)} type="checkbox" {...props} />
@@ -40,24 +45,31 @@ export function Input({ className, ...props }: InputProps) {
 
 export type LabelProps = BaseLabelProps;
 
+/** The label of a checkbox. */
 export function Label({ className, ...props }: LabelProps) {
   return <BaseLabel className={clsx('govuk-checkboxes__label', className)} {...props} />;
 }
 
 export type HintProps = BaseHintProps;
 
+/** The hint of a checkbox. */
 export function Hint({ className, ...props }: HintProps) {
   return <BaseHint className={clsx('govuk-checkboxes__hint', className)} {...props} />;
 }
 
 export type DividerProps = ComponentProps<'div'>;
 
+/** Text that separates the checkboxes before it from those after it, for example "or". */
 export function Divider({ className, ...props }: DividerProps) {
   return <div className={clsx('govuk-checkboxes__divider', className)} {...props} />;
 }
 
-export type ConditionalProps = ComponentProps<'div'> & { checked?: boolean };
+export type ConditionalProps = ComponentProps<'div'> & {
+  /** Whether the checkbox that reveals this content is checked. The content is hidden when it is not. */
+  checked?: boolean;
+};
 
+/** Content that is revealed when the checkbox before it is checked. */
 export function Conditional({ checked, className, ...props }: ConditionalProps) {
   return (
     <div
@@ -72,6 +84,7 @@ export function Conditional({ checked, className, ...props }: ConditionalProps) 
 }
 
 export type ItemCompositeProps = InputProps & {
+  /** The `id` of the checkbox input, used as a prefix for the `id`s of its hint and conditional content. */
   id: string;
   /** The label used by each checkbox item within the checkboxes component. */
   label: ReactNode;
@@ -81,6 +94,7 @@ export type ItemCompositeProps = InputProps & {
   conditional?: ReactNode;
 };
 
+/** A checkbox with its label, hint and conditional content. */
 export function ItemComposite({
   id,
   label,
@@ -127,7 +141,13 @@ export type FieldProps = LegendFieldProps &
     | {
         children?: never;
         /** Prefer children, which memoise and re-render better. */
-        items: (ItemCompositeProps | { divider: ReactNode })[];
+        items: (
+          | ItemCompositeProps
+          | {
+              /** Divider text to separate checkbox items, for example the text `"or"`. */
+              divider: ReactNode;
+            }
+        )[];
       }
   );
 

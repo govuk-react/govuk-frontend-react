@@ -8,7 +8,9 @@ import { Hint } from '../hint';
 import { LabelComposite } from '../label';
 
 export type SelectProps = ComponentProps<'select'> & {
+  /** Whether to show the error state. */
   error?: boolean;
+  /** The width of the element as a fraction of its container. */
   width?: FluidWidth;
 };
 

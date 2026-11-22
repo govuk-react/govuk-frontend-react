@@ -25,7 +25,7 @@ export default {
       {...attributes(options.attributes)}
     >
       {((options.items as Options[] | undefined) ?? []).map((item, index) => (
-        <LanguageNavigation.ItemComposite
+        <LanguageNavigation.ListItemComposite
           key={index}
           {...optional('href', item.href as string)}
           {...optional('lang', item.lang as string)}
@@ -35,7 +35,7 @@ export default {
           languageDescription={item.languageDescriptionText as string | undefined}
         >
           {content(item)}
-        </LanguageNavigation.ItemComposite>
+        </LanguageNavigation.ListItemComposite>
       ))}
     </LanguageNavigation.Composite>
   ),

@@ -37,12 +37,14 @@ export function Root({
 
 export type ListProps = ComponentProps<'ol'>;
 
+/** The list of breadcrumbs. */
 export function List({ className, ...props }: ListProps) {
   return <ol className={clsx('govuk-breadcrumbs__list', className)} {...props} />;
 }
 
 export type ItemProps = ComponentProps<'li'>;
 
+/** A breadcrumb. */
 export function Item({ className, ...props }: ItemProps) {
   return <li className={clsx('govuk-breadcrumbs__list-item', className)} {...props} />;
 }
@@ -52,6 +54,7 @@ export type LinkProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** The link of a breadcrumb. */
 export function Link({ className, asChild, children, ...props }: LinkProps) {
   const Element = asChild ? Slot : 'a';
   return (

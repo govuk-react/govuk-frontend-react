@@ -12,32 +12,19 @@ export default { title: 'Accordion', component: Accordion.Root } satisfies Meta<
 export const Default = {
   render: () => (
     <Accordion.Composite id="accordion-default">
-      <Accordion.SectionComposite
-        accordionId="accordion-default"
-        index={1}
-        heading="Writing well for the web"
-      >
+      <Accordion.SectionComposite idPrefix="accordion-default-1" heading="Writing well for the web">
         <Body>This is the content for Writing well for the web.</Body>
       </Accordion.SectionComposite>
       <Accordion.SectionComposite
-        accordionId="accordion-default"
-        index={2}
+        idPrefix="accordion-default-2"
         heading="Writing well for specialists"
       >
         <Body>This is the content for Writing well for specialists.</Body>
       </Accordion.SectionComposite>
-      <Accordion.SectionComposite
-        accordionId="accordion-default"
-        index={3}
-        heading="Know your audience"
-      >
+      <Accordion.SectionComposite idPrefix="accordion-default-3" heading="Know your audience">
         <Body>This is the content for Know your audience.</Body>
       </Accordion.SectionComposite>
-      <Accordion.SectionComposite
-        accordionId="accordion-default"
-        index={4}
-        heading="How people read"
-      >
+      <Accordion.SectionComposite idPrefix="accordion-default-4" heading="How people read">
         <Body>This is the content for How people read.</Body>
       </Accordion.SectionComposite>
     </Accordion.Composite>

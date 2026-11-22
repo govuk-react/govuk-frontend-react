@@ -23,6 +23,7 @@ export function Root({ className, ...props }: RootProps) {
 
 export type GridColumnProps = Partial<BaseGridColumnProps>;
 
+/** The column that holds the title and body. Its `width` defaults to `two-thirds`. */
 export function GridColumn({ width = 'two-thirds', ...props }: GridColumnProps) {
   return <BaseGridColumn width={width} {...props} />;
 }
@@ -32,6 +33,7 @@ export type TitleProps = ComponentProps<'h2'> & {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
+/** The title of the feedback section. */
 export function Title({ headingLevel = 2, className, ...props }: TitleProps) {
   const Heading = `h${headingLevel}` as const;
   return <Heading className={clsx('govuk-feedback__title', className)} {...props} />;
@@ -39,6 +41,7 @@ export function Title({ headingLevel = 2, className, ...props }: TitleProps) {
 
 export type BodyProps = ComponentProps<'div'>;
 
+/** The body of the feedback section. */
 export function Body({ className, ...props }: BodyProps) {
   return <div className={clsx('govuk-feedback__body', className)} {...props} />;
 }

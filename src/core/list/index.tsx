@@ -3,8 +3,11 @@ import { clsx } from 'clsx';
 import { overrideClasses, type Spacing } from '../../overrides';
 
 export type ListProps = ComponentProps<'ol'> & {
+  /** Whether to show bullets or numbers. The default is a list with neither. */
   variant?: 'bullet' | 'number';
+  /** Whether to add extra space between the items. */
   spaced?: boolean;
+  /** Overrides the bottom margin with a point on the spacing scale, from `0` to `9`. */
   marginBottom?: Spacing;
 };
 

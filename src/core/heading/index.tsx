@@ -3,8 +3,11 @@ import { clsx } from 'clsx';
 import { overrideClasses, type Spacing } from '../../overrides';
 
 export type HeadingProps = ComponentProps<'h2'> & {
+  /** The size of the heading text. */
   size: 'xl' | 'l' | 'm' | 's';
+  /** Heading level, from `1` to `6`. */
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Overrides the bottom margin with a point on the spacing scale, from `0` to `9`. */
   marginBottom?: Spacing;
 };
 

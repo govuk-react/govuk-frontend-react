@@ -14,8 +14,12 @@ export function Root({ className, ...props }: RootProps) {
   return <ul className={clsx('govuk-task-list', className)} {...props} />;
 }
 
-export type ItemProps = ComponentProps<'li'> & { withLink?: boolean };
+export type ItemProps = ComponentProps<'li'> & {
+  /** Whether the task has a link, so that the whole item is styled as clickable. */
+  withLink?: boolean;
+};
 
+/** A task in the list. */
 export function Item({ withLink, className, ...props }: ItemProps) {
   return (
     <li
@@ -31,6 +35,7 @@ export function Item({ withLink, className, ...props }: ItemProps) {
 
 export type NameAndHintProps = ComponentProps<'div'>;
 
+/** Holds the name of a task, and its hint if it has one. */
 export function NameAndHint({ className, ...props }: NameAndHintProps) {
   return <div className={clsx('govuk-task-list__name-and-hint', className)} {...props} />;
 }
@@ -40,6 +45,7 @@ export type LinkProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** The link of a task, containing its name. */
 export function Link({ className, asChild, children, ...props }: LinkProps) {
   const Element = asChild ? Slot : 'a';
   return (
@@ -51,12 +57,17 @@ export function Link({ className, asChild, children, ...props }: LinkProps) {
 
 export type HintProps = ComponentProps<'div'>;
 
+/** The hint of a task. */
 export function Hint({ className, ...props }: HintProps) {
   return <div className={clsx('govuk-task-list__hint', className)} {...props} />;
 }
 
-export type StatusProps = ComponentProps<'div'> & { cannotStartYet?: boolean };
+export type StatusProps = ComponentProps<'div'> & {
+  /** Whether to style the status as a task the user cannot start yet. */
+  cannotStartYet?: boolean;
+};
 
+/** The status of a task. */
 export function Status({ cannotStartYet, className, ...props }: StatusProps) {
   return (
     <div
@@ -84,6 +95,7 @@ export type ItemCompositeProps = Omit<ItemProps, 'title' | 'withLink'> & {
   hint?: ReactNode;
   /** The status for each task within the task list component. */
   status: ReactNode;
+  /** Whether to style the status as a task the user cannot start yet. */
   cannotStartYet?: boolean;
 };
 
@@ -126,7 +138,10 @@ export type CompositeProps = Omit<RootProps, 'children'> & {
     | {
         children?: never;
         /** Prefer children, which memoise and re-render better. */
-        items: (Omit<ItemCompositeProps, 'idPrefix'> & { idPrefix?: string })[];
+        items: (Omit<ItemCompositeProps, 'idPrefix'> & {
+          /** Optional prefix. This is used to prefix the `id` attribute for the task list item tag and hint, separated by `-`. Defaults to `"task-list"`. */
+          idPrefix?: string;
+        })[];
       }
   );
 

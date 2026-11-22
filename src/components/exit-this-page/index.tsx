@@ -42,8 +42,12 @@ export function Root({
   );
 }
 
-export type ButtonProps = Omit<ButtonLinkProps, 'href' | 'variant'> & { href?: string };
+export type ButtonProps = Omit<ButtonLinkProps, 'href' | 'variant'> & {
+  /** URL to redirect the current tab to. Defaults to `"https://www.bbc.co.uk/weather"`. */
+  href?: string;
+};
 
+/** The button that takes the user to another page. */
 export function Button({ href, className, ...props }: ButtonProps) {
   return (
     <BaseButton

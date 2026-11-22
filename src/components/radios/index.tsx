@@ -7,7 +7,12 @@ import * as Fieldset from '../fieldset';
 import { Hint as BaseHint, type HintProps as BaseHintProps } from '../hint';
 import { LabelComposite as BaseLabel, type LabelCompositeProps as BaseLabelProps } from '../label';
 
-export type RootProps = ComponentProps<'div'> & { inline?: boolean; small?: boolean };
+export type RootProps = ComponentProps<'div'> & {
+  /** Whether to show the radios next to each other. */
+  inline?: boolean;
+  /** Whether to use smaller radios. */
+  small?: boolean;
+};
 
 /**
  * Let users select a single option from a list using the radios component.
@@ -31,36 +36,45 @@ export function Root({ inline, small, className, ...props }: RootProps) {
 
 export type ItemProps = ComponentProps<'div'>;
 
+/** A radio with its label, and its hint if it has one. */
 export function Item({ className, ...props }: ItemProps) {
   return <div className={clsx('govuk-radios__item', className)} {...props} />;
 }
 
 export type InputProps = Omit<ComponentProps<'input'>, 'type'>;
 
+/** The radio input. */
 export function Input({ className, ...props }: InputProps) {
   return <input className={clsx('govuk-radios__input', className)} type="radio" {...props} />;
 }
 
 export type LabelProps = BaseLabelProps;
 
+/** The label of a radio. */
 export function Label({ className, ...props }: LabelProps) {
   return <BaseLabel className={clsx('govuk-radios__label', className)} {...props} />;
 }
 
 export type HintProps = BaseHintProps;
 
+/** The hint of a radio. */
 export function Hint({ className, ...props }: HintProps) {
   return <BaseHint className={clsx('govuk-radios__hint', className)} {...props} />;
 }
 
 export type DividerProps = ComponentProps<'div'>;
 
+/** Text that separates the radios before it from those after it, for example "or". */
 export function Divider({ className, ...props }: DividerProps) {
   return <div className={clsx('govuk-radios__divider', className)} {...props} />;
 }
 
-export type ConditionalProps = ComponentProps<'div'> & { checked?: boolean };
+export type ConditionalProps = ComponentProps<'div'> & {
+  /** Whether the radio that reveals this content is checked. The content is hidden when it is not. */
+  checked?: boolean;
+};
 
+/** Content that is revealed when the radio before it is checked. */
 export function Conditional({ checked, className, ...props }: ConditionalProps) {
   return (
     <div
@@ -75,6 +89,7 @@ export function Conditional({ checked, className, ...props }: ConditionalProps) 
 }
 
 export type ItemCompositeProps = InputProps & {
+  /** The `id` of the radio input, used as a prefix for the `id`s of its hint and conditional content. */
   id: string;
   /** The label used by each radio item within the radios component. */
   label: ReactNode;
@@ -84,6 +99,7 @@ export type ItemCompositeProps = InputProps & {
   conditional?: ReactNode;
 };
 
+/** A radio with its label, hint and conditional content. */
 export function ItemComposite({
   id,
   label,
@@ -130,7 +146,13 @@ export type FieldProps = LegendFieldProps &
     | {
         children?: never;
         /** Prefer children, which memoise and re-render better. */
-        items: (ItemCompositeProps | { divider: ReactNode })[];
+        items: (
+          | ItemCompositeProps
+          | {
+              /** Divider text to separate radio items, for example the text `"or"`. */
+              divider: ReactNode;
+            }
+        )[];
       }
   );
 

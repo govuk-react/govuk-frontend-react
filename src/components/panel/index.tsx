@@ -3,6 +3,7 @@ import { clsx } from 'clsx';
 import { hasContent } from '../../utils/has-content';
 
 export type RootProps = ComponentProps<'div'> & {
+  /** The style of the panel. */
   variant?: 'confirmation' | 'interruption';
 };
 
@@ -20,6 +21,7 @@ export type TitleProps = ComponentProps<'h1'> & {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
+/** The title of the panel. */
 export function Title({ className, headingLevel = 1, ...props }: TitleProps) {
   const Heading = `h${headingLevel}` as const;
   return <Heading className={clsx('govuk-panel__title', className)} {...props} />;
@@ -27,18 +29,21 @@ export function Title({ className, headingLevel = 1, ...props }: TitleProps) {
 
 export type BodyProps = ComponentProps<'div'>;
 
+/** The content of the panel. */
 export function Body({ className, ...props }: BodyProps) {
   return <div className={clsx('govuk-panel__body', className)} {...props} />;
 }
 
 export type ActionsProps = ComponentProps<'div'>;
 
+/** The buttons and links of an interruption panel. */
 export function Actions({ className, ...props }: ActionsProps) {
   return <div className={clsx('govuk-panel__actions', className)} {...props} />;
 }
 
 export type CompositeProps = Omit<RootProps, 'title'> &
   Pick<TitleProps, 'headingLevel'> & {
+    /** The title of the panel. */
     title: ReactNode;
     /** Can be used when creating an [interruption panel](https://design-system.service.gov.uk/components/panel/#interruption-panel) which will add a button or link. */
     actions?: ReactNode;

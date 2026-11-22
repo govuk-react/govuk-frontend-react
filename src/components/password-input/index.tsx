@@ -57,12 +57,14 @@ export function Root({
 
 export type WrapperProps = ComponentProps<'div'>;
 
+/** Wraps the input and the button that shows and hides the password. */
 export function Wrapper({ className, ...props }: WrapperProps) {
   return <InputWrapper className={clsx('govuk-password-input__wrapper', className)} {...props} />;
 }
 
 export type InputProps = ControlProps;
 
+/** The password input. */
 export function Input({ className, autoComplete, ...props }: InputProps) {
   return (
     <Control
@@ -78,6 +80,7 @@ export function Input({ className, autoComplete, ...props }: InputProps) {
 
 export type ToggleProps = ComponentProps<'button'>;
 
+/** The button that shows and hides the password. It is hidden until JavaScript runs. */
 export function Toggle({
   className,
   children,

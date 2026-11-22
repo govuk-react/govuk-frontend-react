@@ -59,6 +59,7 @@ export type SectionProps = ComponentProps<'div'> & {
   expanded?: boolean;
 };
 
+/** A section of the accordion: a header and the content it shows and hides. */
 export function Section({ expanded, className, ...props }: SectionProps) {
   return (
     <div
@@ -74,6 +75,7 @@ export function Section({ expanded, className, ...props }: SectionProps) {
 
 export type SectionHeaderProps = ComponentProps<'div'>;
 
+/** The header of a section, containing its heading and summary. */
 export function SectionHeader({ className, ...props }: SectionHeaderProps) {
   return <div className={clsx('govuk-accordion__section-header', className)} {...props} />;
 }
@@ -83,6 +85,7 @@ export type SectionHeadingProps = ComponentProps<'h2'> & {
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
+/** The heading of a section. */
 export function SectionHeading({ headingLevel = 2, className, ...props }: SectionHeadingProps) {
   const Heading = `h${headingLevel}` as const;
   return <Heading className={clsx('govuk-accordion__section-heading', className)} {...props} />;
@@ -90,12 +93,14 @@ export function SectionHeading({ headingLevel = 2, className, ...props }: Sectio
 
 export type SectionButtonProps = ComponentProps<'span'>;
 
+/** The text of the section heading. It becomes a `<button>` that shows and hides the section once JavaScript runs. */
 export function SectionButton({ className, ...props }: SectionButtonProps) {
   return <span className={clsx('govuk-accordion__section-button', className)} {...props} />;
 }
 
 export type SectionSummaryProps = ComponentProps<'div'>;
 
+/** The summary line of a section. */
 export function SectionSummary({ className, ...props }: SectionSummaryProps) {
   return (
     <div className={clsx('govuk-accordion__section-summary', 'govuk-body', className)} {...props} />
@@ -104,43 +109,58 @@ export function SectionSummary({ className, ...props }: SectionSummaryProps) {
 
 export type SectionContentProps = ComponentProps<'div'>;
 
+/** The content of a section, hidden until the section is expanded. */
 export function SectionContent({ className, ...props }: SectionContentProps) {
   return <div className={clsx('govuk-accordion__section-content', className)} {...props} />;
 }
 
-export type SectionCompositeProps = SectionProps &
+type SectionIds = { headingId: string; summaryId: string; contentId: string };
+
+type SectionContentsProps = SectionProps &
   Pick<SectionHeadingProps, 'headingLevel'> & {
-    /** The `id` of the accordion, used as a prefix for the `id`s of the section contents and the buttons that open them. */
-    accordionId: string;
-    /** The section's position, from 1, used in its ids as the macro does. */
-    index: number;
     /** The heading of each accordion section. The header is inside the HTML `<button>` element, so you can only add [phrasing content](https://html.spec.whatwg.org/#phrasing-content) to it. */
     heading: ReactNode;
     /** The summary line of each accordion section. The summary line is inside the HTML `<button>` element, so you can only add [phrasing content](https://html.spec.whatwg.org/#phrasing-content) to it. */
     summary?: ReactNode;
   };
 
-export function SectionComposite({
-  accordionId,
-  index,
+function SectionWithIds({
+  headingId,
+  summaryId,
+  contentId,
   heading,
   summary,
   headingLevel,
   children,
   ...props
-}: SectionCompositeProps) {
+}: SectionContentsProps & SectionIds) {
   return (
     <Section {...props}>
       <SectionHeader>
         <SectionHeading headingLevel={headingLevel}>
-          <SectionButton id={`${accordionId}-heading-${index}`}>{heading}</SectionButton>
+          <SectionButton id={headingId}>{heading}</SectionButton>
         </SectionHeading>
-        {hasContent(summary) && (
-          <SectionSummary id={`${accordionId}-summary-${index}`}>{summary}</SectionSummary>
-        )}
+        {hasContent(summary) && <SectionSummary id={summaryId}>{summary}</SectionSummary>}
       </SectionHeader>
-      <SectionContent id={`${accordionId}-content-${index}`}>{children}</SectionContent>
+      <SectionContent id={contentId}>{children}</SectionContent>
     </Section>
+  );
+}
+
+export type SectionCompositeProps = SectionContentsProps & {
+  /** Prefix for the `id`s of the section's heading, summary and content. Must be unique on the page. */
+  idPrefix: string;
+};
+
+/** `idPrefix` prefixes the heading, summary and content ids. */
+export function SectionComposite({ idPrefix, ...props }: SectionCompositeProps) {
+  return (
+    <SectionWithIds
+      headingId={`${idPrefix}-heading`}
+      summaryId={`${idPrefix}-summary`}
+      contentId={`${idPrefix}-content`}
+      {...props}
+    />
   );
 }
 
@@ -153,7 +173,7 @@ export type CompositeProps = Omit<RootProps, 'id' | 'children'> &
     | {
         children?: never;
         /** Prefer children, which memoise and re-render better. */
-        sections: Omit<SectionCompositeProps, 'accordionId' | 'index' | 'headingLevel'>[];
+        sections: Omit<SectionCompositeProps, 'idPrefix' | 'headingLevel'>[];
       }
   );
 
@@ -169,10 +189,11 @@ export function Composite({ id, headingLevel, sections, children, ...props }: Co
     <Root id={id} {...props}>
       {sections
         ? sections.map((section, index) => (
-            <SectionComposite
+            <SectionWithIds
               key={index}
-              accordionId={id}
-              index={index + 1}
+              headingId={`${id}-heading-${index + 1}`}
+              summaryId={`${id}-summary-${index + 1}`}
+              contentId={`${id}-content-${index + 1}`}
               headingLevel={headingLevel}
               {...section}
             />

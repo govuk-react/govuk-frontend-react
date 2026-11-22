@@ -21,18 +21,21 @@ export function Root({ className, ...props }: RootProps) {
 
 export type ItemProps = ComponentProps<'div'>;
 
+/** One of the day, month and year fields. */
 export function Item({ className, ...props }: ItemProps) {
   return <div className={clsx('govuk-date-input__item', className)} {...props} />;
 }
 
 export type LabelProps = BaseLabelProps;
 
+/** The label of a day, month or year field. */
 export function Label({ className, ...props }: LabelProps) {
   return <BaseLabel className={clsx('govuk-date-input__label', className)} {...props} />;
 }
 
 export type InputProps = ControlProps;
 
+/** The input of a day, month or year field. */
 export function Input({ className, inputMode = 'numeric', ...props }: InputProps) {
   return (
     <Control
@@ -48,7 +51,14 @@ export type FieldProps = LegendFieldProps &
     /** This is used for the main component and to compose the ID attribute for each item. */
     id: string;
     /** Specify `value` attributes for the date parts. */
-    values?: { day?: string; month?: string; year?: string };
+    values?: {
+      /** The value of the day input. */
+      day?: string;
+      /** The value of the month input. */
+      month?: string;
+      /** The value of the year input. */
+      year?: string;
+    };
     /** Optional prefix. This is used to prefix each item `name`, separated by `-`. */
     namePrefix?: string;
     /** The legend for the fieldset used by the date input component. */
