@@ -3,7 +3,10 @@ import { clsx } from 'clsx';
 import { hasContent } from '../../utils/has-content';
 import { VisuallyHidden } from '../../utilities/visually-hidden';
 
-export type RootProps = ComponentProps<'nav'> & { inverse?: boolean };
+export type RootProps = ComponentProps<'nav'> & {
+  /** Whether to use the inverse colours, for a dark background. */
+  inverse?: boolean;
+};
 
 /**
  * The Language navigation component helps users choose and switch between languages when using a service.
@@ -31,18 +34,21 @@ export function Root({
 
 export type ListProps = ComponentProps<'ul'>;
 
+/** The list of languages. */
 export function List({ className, ...props }: ListProps) {
   return <ul className={clsx('govuk-language-navigation__list', className)} {...props} />;
 }
 
 export type ListItemProps = ComponentProps<'li'>;
 
+/** A language in the list. */
 export function ListItem({ className, ...props }: ListItemProps) {
   return <li className={clsx('govuk-language-navigation__list-item', className)} {...props} />;
 }
 
 export type TextProps = ComponentProps<'span'>;
 
+/** The language of the current page. */
 export function Text({ className, ...props }: TextProps) {
   return (
     <span
@@ -55,6 +61,7 @@ export function Text({ className, ...props }: TextProps) {
 
 export type LinkProps = ComponentProps<'a'>;
 
+/** A link to the page in another language. */
 export function Link({ lang, hrefLang, className, children, ...props }: LinkProps) {
   return (
     <a
@@ -69,7 +76,7 @@ export function Link({ lang, hrefLang, className, children, ...props }: LinkProp
   );
 }
 
-export type ItemCompositeProps = Omit<LinkProps, 'href'> & {
+export type ListItemCompositeProps = Omit<LinkProps, 'href'> & {
   /** Link to the current page in this language. */
   href?: string;
   /** Whether this is the language of the current page. Defaults to `true` when `href` is not provided. */
@@ -79,14 +86,14 @@ export type ItemCompositeProps = Omit<LinkProps, 'href'> & {
 };
 
 /** A link to the page in another language, or the current language when `current` or there's no `href`. */
-export function ItemComposite({
+export function ListItemComposite({
   href,
   current,
   languageDescription,
   hrefLang,
   children,
   ...props
-}: ItemCompositeProps) {
+}: ListItemCompositeProps) {
   return (
     <ListItem>
       {current || !href ? (
@@ -111,14 +118,14 @@ export type CompositeProps = Omit<RootProps, 'children'> &
     | {
         children?: never;
         /** Prefer children, which memoise and re-render better. */
-        items: ItemCompositeProps[];
+        items: ListItemCompositeProps[];
       }
   );
 
 /**
  * The Language navigation component helps users choose and switch between languages when using a service.
  *
- * Children are `ItemComposite`s.
+ * Children are `ListItemComposite`s.
  *
  * @see https://design-system.service.gov.uk/components/language-navigation/
  */
@@ -126,7 +133,7 @@ export function Composite({ items, children, ...props }: CompositeProps) {
   return (
     <Root {...props}>
       <List>
-        {items ? items.map((item, index) => <ItemComposite key={index} {...item} />) : children}
+        {items ? items.map((item, index) => <ListItemComposite key={index} {...item} />) : children}
       </List>
     </Root>
   );

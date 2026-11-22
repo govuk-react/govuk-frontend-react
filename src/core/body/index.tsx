@@ -3,7 +3,9 @@ import { clsx } from 'clsx';
 import { overrideClasses, type Spacing } from '../../overrides';
 
 export type BodyProps = ComponentProps<'p'> & {
+  /** The size of the text. */
   size?: 'l' | 'm' | 's';
+  /** Overrides the bottom margin with a point on the spacing scale, from `0` to `9`. */
   marginBottom?: Spacing;
 };
 

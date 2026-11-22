@@ -27,12 +27,14 @@ export function Root({ disableAutoFocus, className, ...props }: RootProps) {
 
 export type AlertProps = ComponentProps<'div'>;
 
+/** The element with `role="alert"` that wraps the title and body. */
 export function Alert(props: AlertProps) {
   return <div role="alert" {...props} />;
 }
 
 export type TitleProps = ComponentProps<'h2'>;
 
+/** The title of the error summary. */
 export function Title({ className, children, ...props }: TitleProps) {
   return (
     <h2 className={clsx('govuk-error-summary__title', className)} {...props}>
@@ -43,24 +45,28 @@ export function Title({ className, children, ...props }: TitleProps) {
 
 export type BodyProps = ComponentProps<'div'>;
 
+/** The body of the error summary, containing the description and the list of errors. */
 export function Body({ className, ...props }: BodyProps) {
   return <div className={clsx('govuk-error-summary__body', className)} {...props} />;
 }
 
 export type DescriptionProps = ComponentProps<'p'>;
 
+/** Text shown above the list of errors. */
 export function Description(props: DescriptionProps) {
   return <p {...props} />;
 }
 
 export type ListProps = ComponentProps<'ul'>;
 
+/** The list of errors. */
 export function List({ className, ...props }: ListProps) {
   return <ul className={clsx('govuk-list', 'govuk-error-summary__list', className)} {...props} />;
 }
 
 export type ListItemProps = ComponentProps<'li'>;
 
+/** An error in the list. */
 export function ListItem(props: ListItemProps) {
   return <li {...props} />;
 }

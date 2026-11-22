@@ -4,7 +4,10 @@ import { hasContent } from '../../utils/has-content';
 import { VisuallyHidden } from '../../utilities/visually-hidden';
 import { Slot } from '../../utils/slot';
 
-export type RootProps = ComponentProps<'nav'> & { block?: boolean };
+export type RootProps = ComponentProps<'nav'> & {
+  /** Whether to stack the previous and next links, for use without page numbers. */
+  block?: boolean;
+};
 
 /**
  * Help users navigate collections of numbered pages like search results.
@@ -28,12 +31,14 @@ export function Root({
 
 export type PreviousProps = ComponentProps<'div'>;
 
+/** The area that holds the link to the previous page. */
 export function Previous({ className, ...props }: PreviousProps) {
   return <div className={clsx('govuk-pagination__prev', className)} {...props} />;
 }
 
 export type NextProps = ComponentProps<'div'>;
 
+/** The area that holds the link to the next page. */
 export function Next({ className, ...props }: NextProps) {
   return <div className={clsx('govuk-pagination__next', className)} {...props} />;
 }
@@ -43,6 +48,7 @@ export type LinkProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** A link to a page. */
 export function Link({ className, asChild, children, ...props }: LinkProps) {
   const Element = asChild ? Slot : 'a';
   return (
@@ -52,10 +58,12 @@ export function Link({ className, asChild, children, ...props }: LinkProps) {
   );
 }
 
+/** The link to the previous page. */
 export function PreviousLink(props: LinkProps) {
   return <Link rel="prev" {...props} />;
 }
 
+/** The link to the next page. */
 export function NextLink(props: LinkProps) {
   return <Link rel="next" {...props} />;
 }
@@ -77,6 +85,7 @@ function Icon({ className, ...props }: IconProps) {
   );
 }
 
+/** The arrow of the link to the previous page. */
 export function PreviousIcon({ className, ...props }: IconProps) {
   return (
     <Icon className={clsx('govuk-pagination__icon--prev', className)} {...props}>
@@ -85,6 +94,7 @@ export function PreviousIcon({ className, ...props }: IconProps) {
   );
 }
 
+/** The arrow of the link to the next page. */
 export function NextIcon({ className, ...props }: IconProps) {
   return (
     <Icon className={clsx('govuk-pagination__icon--next', className)} {...props}>
@@ -93,8 +103,12 @@ export function NextIcon({ className, ...props }: IconProps) {
   );
 }
 
-export type LinkTitleProps = ComponentProps<'span'> & { decorated?: boolean };
+export type LinkTitleProps = ComponentProps<'span'> & {
+  /** Whether the title is followed by a label, so that it is styled as the first line of the link. */
+  decorated?: boolean;
+};
 
+/** The text of the link to the previous or next page. */
 export function LinkTitle({ decorated, className, ...props }: LinkTitleProps) {
   return (
     <span
@@ -108,6 +122,7 @@ export function LinkTitle({ decorated, className, ...props }: LinkTitleProps) {
   );
 }
 
+/** The text of the link to the previous page, which defaults to "Previous page". */
 export function PreviousLinkTitleComposite({ children, ...props }: LinkTitleProps) {
   return (
     <LinkTitle {...props}>
@@ -122,6 +137,7 @@ export function PreviousLinkTitleComposite({ children, ...props }: LinkTitleProp
   );
 }
 
+/** The text of the link to the next page, which defaults to "Next page". */
 export function NextLinkTitleComposite({ children, ...props }: LinkTitleProps) {
   return (
     <LinkTitle {...props}>
@@ -138,18 +154,26 @@ export function NextLinkTitleComposite({ children, ...props }: LinkTitleProps) {
 
 export type LinkLabelProps = ComponentProps<'span'>;
 
+/** Text that describes the page a previous or next link goes to, in the block style of pagination. */
 export function LinkLabel({ className, ...props }: LinkLabelProps) {
   return <span className={clsx('govuk-pagination__link-label', className)} {...props} />;
 }
 
 export type ListProps = ComponentProps<'ul'>;
 
+/** The list of page numbers. */
 export function List({ className, ...props }: ListProps) {
   return <ul className={clsx('govuk-pagination__list', className)} {...props} />;
 }
 
-export type ItemProps = ComponentProps<'li'> & { current?: boolean; ellipsis?: boolean };
+export type ItemProps = ComponentProps<'li'> & {
+  /** Whether this is the current page. */
+  current?: boolean;
+  /** Whether the item is an ellipsis in place of skipped pages. */
+  ellipsis?: boolean;
+};
 
+/** A page number, or an ellipsis in place of skipped pages. */
 export function Item({ current, ellipsis, className, children, ...props }: ItemProps) {
   return (
     <li
@@ -166,6 +190,7 @@ export function Item({ current, ellipsis, className, children, ...props }: ItemP
   );
 }
 
+/** The link of a page number. */
 export function ItemLink({ children, ...props }: LinkProps) {
   return (
     <Link
@@ -188,6 +213,7 @@ export type ItemCompositeProps = Omit<LinkProps, 'children'> & {
   ellipsis?: boolean;
 };
 
+/** A page number with its link, or an ellipsis. */
 export function ItemComposite({ number, current, ellipsis, ...props }: ItemCompositeProps) {
   if (ellipsis) return <Item ellipsis />;
   return (

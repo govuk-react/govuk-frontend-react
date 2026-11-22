@@ -14,18 +14,21 @@ export function Root({ className, ...props }: RootProps) {
 
 export type SummaryProps = ComponentProps<'summary'>;
 
+/** The summary that the user selects to show and hide the content. */
 export function Summary({ className, ...props }: SummaryProps) {
   return <summary className={clsx('govuk-details__summary', className)} {...props} />;
 }
 
 export type SummaryTextProps = ComponentProps<'span'>;
 
+/** The text of the summary. */
 export function SummaryText({ className, ...props }: SummaryTextProps) {
   return <span className={clsx('govuk-details__summary-text', className)} {...props} />;
 }
 
 export type TextProps = ComponentProps<'div'>;
 
+/** The content that the summary shows and hides. */
 export function Text({ className, ...props }: TextProps) {
   return <div className={clsx('govuk-details__text', className)} {...props} />;
 }

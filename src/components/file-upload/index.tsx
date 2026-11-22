@@ -8,9 +8,11 @@ import { Hint } from '../hint';
 import { LabelComposite } from '../label';
 
 export type FileUploadProps = Omit<ComponentProps<'input'>, 'type' | 'value' | 'defaultValue'> & {
+  /** Whether to show the error state. */
   error?: boolean;
 };
 
+/** The file input. */
 export function FileUpload({ error, className, ...props }: FileUploadProps) {
   return (
     <input
@@ -26,7 +28,7 @@ export type FileUploadWrapperProps = ComponentProps<'div'> & {
   chooseFilesButtonText?: string;
   /** The text displayed when no file has been chosen by the user. Default is `"No file chosen"`. */
   noFileChosenText?: string;
-  /** The text displayed when multiple files have been chosen by the user. The component will replace the `%{count}` placeholder with the number of files selected. [Our pluralisation rules apply to this macro option](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
+  /** The text displayed when multiple files have been chosen by the user. The component will replace the `%{count}` placeholder with the number of files selected. [Our pluralisation rules apply to this prop](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
   multipleFilesChosenText?: Translation;
   /** The text informing users they can drop files. Default is `"or drop file"`. */
   dropInstructionText?: string;
@@ -36,6 +38,7 @@ export type FileUploadWrapperProps = ComponentProps<'div'> & {
   leftDropZoneText?: string;
 };
 
+/** Wraps the file input so that it is replaced by a drop zone and a button once JavaScript runs. */
 export function FileUploadWrapper({
   chooseFilesButtonText,
   noFileChosenText,

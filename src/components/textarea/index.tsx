@@ -8,7 +8,9 @@ import { Hint } from '../hint';
 import { LabelComposite } from '../label';
 
 export type TextareaProps = ComponentProps<'textarea'> & {
+  /** Whether to show the error state. */
   error?: boolean;
+  /** The width of the element as a fraction of its container. */
   width?: FluidWidth;
 };
 

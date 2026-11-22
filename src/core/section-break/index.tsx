@@ -2,7 +2,9 @@ import type { ComponentProps } from 'react';
 import { clsx } from 'clsx';
 
 export type SectionBreakProps = ComponentProps<'hr'> & {
+  /** The amount of space above and below the break. */
   size?: 'xl' | 'l' | 'm';
+  /** Whether to show a line. */
   visible?: boolean;
 };
 

@@ -4,11 +4,13 @@ import { clsx } from 'clsx';
 export type ButtonVariant = 'secondary' | 'warning' | 'inverse';
 
 type OwnProps<As extends ElementType> = {
+  /** The element or component to render. Defaults to `a` when `href` is set, otherwise `button`. */
   as?: As;
   children?: ReactNode;
   className?: string;
   /** The URL that the button should link to. */
   href?: string;
+  /** The style of the button. The default is the primary button. */
   variant?: ButtonVariant;
   /** Prevent accidental double clicks on submit buttons from submitting forms multiple times. This has no effect if `href` is set. */
   preventDoubleClick?: boolean;
@@ -18,7 +20,11 @@ export type ButtonProps<As extends ElementType = 'button'> = OwnProps<As> &
   Omit<ComponentProps<As>, keyof OwnProps<As>>;
 
 export type ButtonLinkProps = Omit<OwnProps<'a'>, 'as' | 'href'> &
-  Omit<ComponentProps<'a'>, keyof OwnProps<'a'>> & { as?: undefined; href: string };
+  Omit<ComponentProps<'a'>, keyof OwnProps<'a'>> & {
+    as?: undefined;
+    /** The URL that the button should link to. */
+    href: string;
+  };
 
 export type StartButtonIconProps = ComponentProps<'svg'>;
 

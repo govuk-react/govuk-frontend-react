@@ -12,8 +12,12 @@ export function Root({ className, ...props }: RootProps) {
   return <div className={clsx('govuk-generic-header', className)} {...props} />;
 }
 
-export type ContainerProps = ComponentProps<'div'> & { fullWidth?: boolean };
+export type ContainerProps = ComponentProps<'div'> & {
+  /** Whether the header spans the full width of the page, without the width container. */
+  fullWidth?: boolean;
+};
 
+/** The container that sets the width of the header. */
 export function Container({ fullWidth, className, ...props }: ContainerProps) {
   return (
     <div
@@ -29,12 +33,14 @@ export function Container({ fullWidth, className, ...props }: ContainerProps) {
 
 export type LogoProps = ComponentProps<'div'>;
 
+/** The area that holds the homepage link. */
 export function Logo({ className, ...props }: LogoProps) {
   return <div className={clsx('govuk-generic-header__logo', className)} {...props} />;
 }
 
 export type HomepageLinkProps = ComponentProps<'a'>;
 
+/** The link to the homepage, containing the logo. */
 export function HomepageLink({ href = '/', className, children, ...props }: HomepageLinkProps) {
   return (
     <a href={href} className={clsx('govuk-generic-header__homepage-link', className)} {...props}>

@@ -7,7 +7,9 @@ import { WidthContainer as BaseWidthContainer } from '../../objects/width-contai
 const defaultNavigationId = 'navigation';
 
 export type RootProps = ComponentProps<'section'> & {
+  /** The element to render. Use `section` when the service navigation is not inside a `<header>`. */
   as?: 'div' | 'section';
+  /** Whether to use the inverse colours, for a dark background. */
   inverse?: boolean;
 };
 
@@ -38,8 +40,12 @@ export function Root({
   );
 }
 
-export type WidthContainerProps = ComponentProps<'div'> & { inlineEndSlot?: boolean };
+export type WidthContainerProps = ComponentProps<'div'> & {
+  /** Whether the content after the navigation is on the same line as the navigation. */
+  inlineEndSlot?: boolean;
+};
 
+/** The container that sets the width of the service navigation. */
 export function WidthContainer({ inlineEndSlot, className, ...props }: WidthContainerProps) {
   return (
     <BaseWidthContainer
@@ -51,12 +57,14 @@ export function WidthContainer({ inlineEndSlot, className, ...props }: WidthCont
 
 export type ContainerProps = ComponentProps<'div'>;
 
+/** Holds the service name and the navigation. */
 export function Container({ className, ...props }: ContainerProps) {
   return <div className={clsx('govuk-service-navigation__container', className)} {...props} />;
 }
 
 export type ServiceNameProps = ComponentProps<'span'>;
 
+/** The name of the service. */
 export function ServiceName({ className, ...props }: ServiceNameProps) {
   return <span className={clsx('govuk-service-navigation__service-name', className)} {...props} />;
 }
@@ -66,6 +74,7 @@ export type LinkProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** A link in the service navigation: the service name or a navigation item. */
 export function Link({ className, asChild, children, ...props }: LinkProps) {
   const Element = asChild ? Slot : 'a';
   return (
@@ -77,12 +86,14 @@ export function Link({ className, asChild, children, ...props }: LinkProps) {
 
 export type TextProps = ComponentProps<'span'>;
 
+/** The text of the service name or of a navigation item when it is not a link. */
 export function Text({ className, ...props }: TextProps) {
   return <span className={clsx('govuk-service-navigation__text', className)} {...props} />;
 }
 
 export type WrapperProps = ComponentProps<'nav'>;
 
+/** The `<nav>` that holds the menu button and the list of navigation items. */
 export function Wrapper({ className, 'aria-label': ariaLabel = 'Menu', ...props }: WrapperProps) {
   return (
     <nav
@@ -95,6 +106,7 @@ export function Wrapper({ className, 'aria-label': ariaLabel = 'Menu', ...props 
 
 export type ToggleProps = ComponentProps<'button'>;
 
+/** The button that shows and hides the navigation on small screens. It is hidden until JavaScript runs. */
 export function Toggle({ className, children, ...props }: ToggleProps) {
   return (
     <button
@@ -116,6 +128,7 @@ export function Toggle({ className, children, ...props }: ToggleProps) {
 
 export type ListProps = ComponentProps<'ul'>;
 
+/** The list of navigation items. */
 export function List({ className, ...props }: ListProps) {
   return (
     <ul
@@ -126,8 +139,12 @@ export function List({ className, ...props }: ListProps) {
   );
 }
 
-export type ItemProps = ComponentProps<'li'> & { active?: boolean };
+export type ItemProps = ComponentProps<'li'> & {
+  /** Whether the item is the current page or section. */
+  active?: boolean;
+};
 
+/** A navigation item. */
 export function Item({ active, className, ...props }: ItemProps) {
   return (
     <li
@@ -143,6 +160,7 @@ export function Item({ active, className, ...props }: ItemProps) {
 
 export type ActiveFallbackProps = ComponentProps<'strong'>;
 
+/** Marks the text of the active item, so that it is styled as active. */
 export function ActiveFallback({ className, ...props }: ActiveFallbackProps) {
   return (
     <strong className={clsx('govuk-service-navigation__active-fallback', className)} {...props} />
@@ -159,6 +177,7 @@ export type ItemCompositeProps = Omit<ItemProps, 'children'> & {
   children?: ReactNode;
 };
 
+/** A navigation item with its link or text. */
 export function ItemComposite({ href, active, current, children, ...props }: ItemCompositeProps) {
   const isActive = Boolean(active || current);
   const ariaCurrent = isActive

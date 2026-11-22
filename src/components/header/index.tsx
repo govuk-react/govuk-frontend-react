@@ -14,8 +14,12 @@ export function Root({ className, ...props }: RootProps) {
   return <div className={clsx('govuk-header', className)} {...props} />;
 }
 
-export type ContainerProps = ComponentProps<'div'> & { fullWidth?: boolean };
+export type ContainerProps = ComponentProps<'div'> & {
+  /** Whether the header spans the full width of the page, without the width container. */
+  fullWidth?: boolean;
+};
 
+/** The container that sets the width of the header. */
 export function Container({ fullWidth, className, ...props }: ContainerProps) {
   return (
     <div
@@ -31,12 +35,14 @@ export function Container({ fullWidth, className, ...props }: ContainerProps) {
 
 export type LogoProps = ComponentProps<'div'>;
 
+/** The area that holds the homepage link. */
 export function Logo({ className, ...props }: LogoProps) {
   return <div className={clsx('govuk-header__logo', className)} {...props} />;
 }
 
 export type HomepageLinkProps = ComponentProps<'a'>;
 
+/** The link to the homepage, containing the logotype. */
 export function HomepageLink({
   href = '//gov.uk',
   className,
@@ -52,6 +58,7 @@ export function HomepageLink({
 
 export type LogotypeProps = Omit<BaseLogoProps, 'useLogotype'>;
 
+/** The GOV.UK logo. */
 export function Logotype({ ariaLabelText = 'GOV.UK', className, ...props }: LogotypeProps) {
   return (
     <BaseLogo
@@ -64,6 +71,7 @@ export function Logotype({ ariaLabelText = 'GOV.UK', className, ...props }: Logo
 
 export type ProductNameProps = ComponentProps<'span'>;
 
+/** The name of the product, shown after the logo. */
 export function ProductName({ className, ...props }: ProductNameProps) {
   return <span className={clsx('govuk-header__product-name', className)} {...props} />;
 }

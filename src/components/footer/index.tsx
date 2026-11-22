@@ -19,12 +19,14 @@ export function Root({ className, ...props }: RootProps) {
   return <div className={clsx('govuk-footer', className)} {...props} />;
 }
 
+/** The crown at the top of the footer. */
 export function Crown({ className, ...props }: CrownProps) {
   return <BaseCrown className={clsx('govuk-footer__crown', className)} {...props} />;
 }
 
 export type NavigationProps = ComponentProps<'div'>;
 
+/** The row of navigation sections. */
 export function Navigation({ className, ...props }: NavigationProps) {
   return <div className={clsx('govuk-footer__navigation', className)} {...props} />;
 }
@@ -37,6 +39,7 @@ export type SectionProps = ComponentProps<'div'> & {
   width?: ColumnWidth | `${ColumnWidth}-from-desktop`;
 };
 
+/** A navigation section: a heading and a list of links. */
 export function Section({ className, width = 'full', ...props }: SectionProps) {
   return (
     <div
@@ -48,6 +51,7 @@ export function Section({ className, width = 'full', ...props }: SectionProps) {
 
 export type HeadingProps = ComponentProps<'h2'>;
 
+/** The heading of a navigation section. */
 export function Heading({ className, children, ...props }: HeadingProps) {
   return (
     <h2 className={clsx('govuk-footer__heading', 'govuk-heading-m', className)} {...props}>
@@ -61,6 +65,7 @@ export type ListProps = ComponentProps<'ul'> & {
   columns?: 1 | 2 | 3;
 };
 
+/** The list of links in a navigation section. */
 export function List({ className, columns, ...props }: ListProps) {
   return (
     <ul
@@ -76,6 +81,7 @@ export function List({ className, columns, ...props }: ListProps) {
 
 export type ListItemProps = ComponentProps<'li'>;
 
+/** An item in the list of links of a navigation section. */
 export function ListItem({ className, ...props }: ListItemProps) {
   return <li className={clsx('govuk-footer__list-item', className)} {...props} />;
 }
@@ -85,6 +91,7 @@ export type LinkProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** A link in the footer. */
 export function Link({ className, asChild, children, ...props }: LinkProps) {
   const Element = asChild ? Slot : 'a';
   return (
@@ -96,20 +103,24 @@ export function Link({ className, asChild, children, ...props }: LinkProps) {
 
 export type SectionBreakProps = ComponentProps<'hr'>;
 
+/** The line between the navigation and the meta section. */
 export function SectionBreak({ className, ...props }: SectionBreakProps) {
   return <hr className={clsx('govuk-footer__section-break', className)} {...props} />;
 }
 
 export type MetaProps = ComponentProps<'div'>;
 
+/** The meta section, containing the meta links, the licence and the copyright notice. */
 export function Meta({ className, ...props }: MetaProps) {
   return <div className={clsx('govuk-footer__meta', className)} {...props} />;
 }
 
 export type MetaItemProps = ComponentProps<'div'> & {
+  /** Whether the column grows to fill the space the other columns leave. */
   grow?: boolean;
 };
 
+/** A column in the meta section. */
 export function MetaItem({ className, grow, ...props }: MetaItemProps) {
   return (
     <div
@@ -125,6 +136,7 @@ export function MetaItem({ className, grow, ...props }: MetaItemProps) {
 
 export type MetaHeadingProps = ComponentProps<'h2'>;
 
+/** The visually hidden heading of the meta links. */
 export function MetaHeading({ className, children, ...props }: MetaHeadingProps) {
   return (
     <h2 className={clsx('govuk-visually-hidden', className)} {...props}>
@@ -135,24 +147,28 @@ export function MetaHeading({ className, children, ...props }: MetaHeadingProps)
 
 export type InlineListProps = ComponentProps<'ul'>;
 
+/** The list of meta links. */
 export function InlineList({ className, ...props }: InlineListProps) {
   return <ul className={clsx('govuk-footer__inline-list', className)} {...props} />;
 }
 
 export type InlineListItemProps = ComponentProps<'li'>;
 
+/** An item in the list of meta links. */
 export function InlineListItem({ className, ...props }: InlineListItemProps) {
   return <li className={clsx('govuk-footer__inline-list-item', className)} {...props} />;
 }
 
 export type MetaCustomProps = ComponentProps<'div'>;
 
+/** Custom content below the meta links. */
 export function MetaCustom({ className, ...props }: MetaCustomProps) {
   return <div className={clsx('govuk-footer__meta-custom', className)} {...props} />;
 }
 
 export type LicenceLogoProps = ComponentProps<'svg'>;
 
+/** The Open Government Licence logo. */
 export function LicenceLogo({ className, ...props }: LicenceLogoProps) {
   return (
     <svg
@@ -175,10 +191,12 @@ export function LicenceLogo({ className, ...props }: LicenceLogoProps) {
 
 export type LicenceDescriptionProps = ComponentProps<'span'>;
 
+/** The text that says how the content is licensed. */
 export function LicenceDescription({ className, ...props }: LicenceDescriptionProps) {
   return <span className={clsx('govuk-footer__licence-description', className)} {...props} />;
 }
 
+/** The licence text, which defaults to the Open Government Licence v3.0 statement. */
 export function LicenceDescriptionComposite({ children, ...props }: LicenceDescriptionProps) {
   return (
     <LicenceDescription {...props}>
@@ -202,6 +220,7 @@ export function LicenceDescriptionComposite({ children, ...props }: LicenceDescr
 
 export type CopyrightLogoProps = ComponentProps<'a'>;
 
+/** The Crown copyright link, shown with the royal coat of arms. */
 export function CopyrightLogo({ className, children, ...props }: CopyrightLogoProps) {
   return (
     <Link

@@ -36,6 +36,7 @@ export function Root({
 
 export type MessageProps = ComponentProps<'div'>;
 
+/** A message in the cookie banner, such as the question or the confirmation that replaces it. */
 export function Message({ className, ...props }: MessageProps) {
   return (
     <div
@@ -47,6 +48,7 @@ export function Message({ className, ...props }: MessageProps) {
 
 export type HeadingProps = ComponentProps<'h2'>;
 
+/** The heading of a message. */
 export function Heading({ className, children, ...props }: HeadingProps) {
   return (
     <h2 className={clsx('govuk-cookie-banner__heading', 'govuk-heading-m', className)} {...props}>
@@ -57,12 +59,14 @@ export function Heading({ className, children, ...props }: HeadingProps) {
 
 export type ContentProps = ComponentProps<'div'>;
 
+/** The content of a message. */
 export function Content({ className, ...props }: ContentProps) {
   return <div className={clsx('govuk-cookie-banner__content', className)} {...props} />;
 }
 
 export type GridColumnProps = Partial<BaseGridColumnProps>;
 
+/** The column that holds the heading and content of a message. Its `width` defaults to `two-thirds`. */
 export function GridColumn({ width = 'two-thirds', ...props }: GridColumnProps) {
   return <BaseGridColumn width={width} {...props} />;
 }
@@ -74,6 +78,7 @@ export type MessageCompositeProps = MessageProps & {
   actions?: ReactNode;
 };
 
+/** A message with its heading, content and actions. */
 export function MessageComposite({ heading, actions, children, ...props }: MessageCompositeProps) {
   return (
     <Message {...props}>

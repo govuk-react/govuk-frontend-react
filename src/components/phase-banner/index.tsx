@@ -17,18 +17,21 @@ export function Root({ className, ...props }: RootProps) {
 
 export type ContentProps = ComponentProps<'p'>;
 
+/** The content of the banner, containing the tag and text. */
 export function Content({ className, ...props }: ContentProps) {
   return <p className={clsx('govuk-phase-banner__content', className)} {...props} />;
 }
 
 export type TagProps = BaseTagProps;
 
+/** The tag that names the phase. */
 export function Tag({ className, ...props }: TagProps) {
   return <BaseTag className={clsx('govuk-phase-banner__content__tag', className)} {...props} />;
 }
 
 export type TextProps = ComponentProps<'span'>;
 
+/** The text shown next to the tag. */
 export function Text({ className, ...props }: TextProps) {
   return <span className={clsx('govuk-phase-banner__text', className)} {...props} />;
 }

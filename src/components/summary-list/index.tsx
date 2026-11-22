@@ -9,6 +9,7 @@ import { VisuallyHidden } from '../../utilities/visually-hidden';
 export * as Card from './card';
 
 export type RootProps = ComponentProps<'dl'> & {
+  /** Whether to remove the borders between rows. */
   noBorder?: boolean;
 };
 
@@ -27,10 +28,13 @@ export function Root({ className, noBorder, ...props }: RootProps) {
 }
 
 export type RowProps = ComponentProps<'div'> & {
+  /** Whether the row has no actions when other rows do, so that its border spans the full width. */
   noActions?: boolean;
+  /** Whether to remove the border below the row. */
   noBorder?: boolean;
 };
 
+/** A row of the summary list: a key, its value and its actions. */
 export function Row({ className, noActions, noBorder, ...props }: RowProps) {
   return (
     <div
@@ -45,8 +49,12 @@ export function Row({ className, noActions, noBorder, ...props }: RowProps) {
   );
 }
 
-export type KeyProps = ComponentProps<'dt'> & { width?: FluidWidth };
+export type KeyProps = ComponentProps<'dt'> & {
+  /** The width of the element as a fraction of its container. */
+  width?: FluidWidth;
+};
 
+/** The key of a row. */
 export function Key({ width, className, ...props }: KeyProps) {
   return (
     <dt
@@ -56,8 +64,12 @@ export function Key({ width, className, ...props }: KeyProps) {
   );
 }
 
-export type ValueProps = ComponentProps<'dd'> & { width?: FluidWidth };
+export type ValueProps = ComponentProps<'dd'> & {
+  /** The width of the element as a fraction of its container. */
+  width?: FluidWidth;
+};
 
+/** The value of a row. */
 export function Value({ width, className, ...props }: ValueProps) {
   return (
     <dd
@@ -67,8 +79,12 @@ export function Value({ width, className, ...props }: ValueProps) {
   );
 }
 
-export type ActionsProps = ComponentProps<'dd'> & { width?: FluidWidth };
+export type ActionsProps = ComponentProps<'dd'> & {
+  /** The width of the element as a fraction of its container. */
+  width?: FluidWidth;
+};
 
+/** The actions of a row, such as a "Change" link. */
 export function Actions({ width, className, ...props }: ActionsProps) {
   return (
     <dd
@@ -80,12 +96,14 @@ export function Actions({ width, className, ...props }: ActionsProps) {
 
 export type ActionsListProps = ComponentProps<'ul'>;
 
+/** The list of actions, when a row has more than one. */
 export function ActionsList({ className, ...props }: ActionsListProps) {
   return <ul className={clsx('govuk-summary-list__actions-list', className)} {...props} />;
 }
 
 export type ActionsListItemProps = ComponentProps<'li'>;
 
+/** An action in the list of actions. */
 export function ActionsListItem({ className, ...props }: ActionsListItemProps) {
   return <li className={clsx('govuk-summary-list__actions-list-item', className)} {...props} />;
 }
@@ -95,6 +113,7 @@ export type ActionProps = ComponentProps<'a'> & {
   asChild?: boolean;
 };
 
+/** The link of an action. */
 export function Action({ className, asChild, children, ...props }: ActionProps) {
   const Element = asChild ? Slot : 'a';
   return (
@@ -105,9 +124,11 @@ export function Action({ className, asChild, children, ...props }: ActionProps) 
 }
 
 export type ActionCompositeProps = ActionProps & {
+  /** Actions rely on context from the surrounding content so may require additional accessible text. Text supplied to this option is appended to the end. */
   visuallyHiddenText?: ReactNode;
 };
 
+/** The link of an action with its visually hidden text. */
 export function ActionComposite({ visuallyHiddenText, children, ...props }: ActionCompositeProps) {
   return (
     <Action {...props}>

@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 import { clsx } from 'clsx';
 
 export type TagProps = ComponentProps<'strong'> & {
+  /** The colour of the tag. The default is blue. */
   colour?:
     | 'grey'
     | 'green'

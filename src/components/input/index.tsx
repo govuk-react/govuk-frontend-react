@@ -9,9 +9,11 @@ import { Hint } from '../hint';
 import { LabelComposite } from '../label';
 
 export type InputProps = Omit<ComponentProps<'input'>, 'width'> & {
+  /** Whether to show the error state. */
   error?: boolean;
   /** A number of characters, or a fraction of the container. */
   width?: 2 | 3 | 4 | 5 | 10 | 20 | 30 | FluidWidth;
+  /** Whether to add extra letter spacing, to make sequences of letters and numbers such as codes easier to read. */
   extraLetterSpacing?: boolean;
 };
 
@@ -53,14 +55,17 @@ export function Input({ className, error, width, extraLetterSpacing, type, ...pr
   );
 }
 
+/** Text shown before the input, such as a currency symbol. */
 export function InputPrefix({ className, ...props }: InputAffixProps) {
   return <div className={clsx('govuk-input__prefix', className)} aria-hidden="true" {...props} />;
 }
 
+/** Text shown after the input, such as a unit. */
 export function InputSuffix({ className, ...props }: InputAffixProps) {
   return <div className={clsx('govuk-input__suffix', className)} aria-hidden="true" {...props} />;
 }
 
+/** Wraps the input with its prefix, suffix or button. */
 export function InputWrapper({ className, ...props }: InputAffixProps) {
   return <div className={clsx('govuk-input__wrapper', className)} {...props} />;
 }

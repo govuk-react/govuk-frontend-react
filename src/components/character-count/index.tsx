@@ -15,21 +15,21 @@ export type RootProps = FormGroupProps & {
   maxWords?: number;
   /** The percentage value of the limit at which point the count message is displayed. If this attribute is set, the count message will be hidden by default. */
   threshold?: number;
-  /** The count type used to count the text – `"length"` or `"words"`. Defaults to `"length"`. */
+  /** The count type used to count the text – `"length"`, `"characters"` or `"words"`. `"characters"` counts an emoji or accented letter as one character. Defaults to `"length"`. */
   countType?: 'characters' | 'words' | 'length';
   /** Message made available to assistive technologies to describe that the component accepts only a limited amount of content. It is visible on the page if `countType` is not supported or JavaScript is unavailable. The component will replace the `%{count}` placeholder with the value of the `maxLength` parameter. */
   textareaDescriptionText?: string;
-  /** Message displayed when the number of characters is under the configured maximum, `maxLength`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of remaining characters. [Our pluralisation rules apply to this macro option](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
+  /** Message displayed when the number of characters is under the configured maximum, `maxLength`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of remaining characters. [Our pluralisation rules apply to this prop](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
   charactersUnderLimitText?: Translation;
   /** Message displayed when the number of characters reaches the configured maximum, `maxLength`. This message is displayed visually and through assistive technologies. */
   charactersAtLimitText?: string;
-  /** Message displayed when the number of characters is over the configured maximum, `maxLength`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of characters above the maximum. [Our pluralisation rules apply to this macro option](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
+  /** Message displayed when the number of characters is over the configured maximum, `maxLength`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of characters above the maximum. [Our pluralisation rules apply to this prop](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
   charactersOverLimitText?: Translation;
-  /** Message displayed when the number of words is under the configured maximum, `maxLength` with `countType: "words"`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of remaining words. [Our pluralisation rules apply to this macro option](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
+  /** Message displayed when the number of words is under the configured maximum, `maxLength` with `countType: "words"`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of remaining words. [Our pluralisation rules apply to this prop](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
   wordsUnderLimitText?: Translation;
   /** Message displayed when the number of words reaches the configured maximum, `maxLength` with `countType: "words"`. This message is displayed visually and through assistive technologies. */
   wordsAtLimitText?: string;
-  /** Message displayed when the number of words is over the configured maximum, `maxLength` with `countType: "words"`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of words above the maximum. [Our pluralisation rules apply to this macro option](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
+  /** Message displayed when the number of words is over the configured maximum, `maxLength` with `countType: "words"`. This message is displayed visually and through assistive technologies. The component will replace the `%{count}` placeholder with the number of words above the maximum. [Our pluralisation rules apply to this prop](https://frontend.design-system.service.gov.uk/localise-govuk-frontend/#understanding-pluralisation-rules). */
   wordsOverLimitText?: Translation;
 };
 
@@ -79,12 +79,14 @@ export function Root({
 
 export type TextareaProps = ControlProps;
 
+/** The textarea whose content is counted. */
 export function Textarea({ className, ...props }: TextareaProps) {
   return <Control className={clsx('govuk-js-character-count', className)} {...props} />;
 }
 
 export type MessageProps = HintProps;
 
+/** The message that shows the limit. It is replaced by the count of remaining characters or words once JavaScript runs. */
 export function Message({ className, ...props }: MessageProps) {
   return <Hint className={clsx('govuk-character-count__message', className)} {...props} />;
 }
